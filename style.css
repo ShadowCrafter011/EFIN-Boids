@@ -3,7 +3,40 @@ body {
     padding: 0;
 }
 
-main {
+iframe {
     height: 100vh;
-    overflow: hidden;
+    width: 100vw;
+    transform: scale(20%);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 1.7em;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.boids-outer {
+    display: flex;
+    position: relative;
+    width: calc(100vw / 5);
+    height: calc(1.7em + 100vh / 5);
+    cursor: pointer;
+}
+
+.boids-outer h3 {
+    margin: 0;
+    font-size: 1.5em;
+    text-align: center;
+    width: calc(100vw / 5);
+}
+
+.boids {
+    display: grid;
+    padding: 1rem;
+    gap: 1rem;
+    grid-template: auto auto auto auto;
+}
+
+a {
+    color: black;
+    text-decoration: none;
 }
