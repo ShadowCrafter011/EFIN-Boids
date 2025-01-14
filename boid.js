@@ -10,7 +10,7 @@ class Boid {
 
         this.protected_range = 50;
         this.visual_range = 300;
-        this.separation_factor = 0.0004;
+        this.separation_factor = 0.08;
         this.matching_factor = 0.02;
         this.cohesion_factor = 0.0005;
         this.turnfactor = PI / 90;
@@ -61,7 +61,7 @@ class Boid {
         });
         // stroke("white");
         // line(this.pos.x, this.pos.y, this.pos.x + close.x, this.pos.y + close.y);
-        this.vel.add(close.mult(this.separation_factor));
+        this.vel.add(close.normalize().mult(this.separation_factor));
     }
 
     match(boids) {

@@ -7,7 +7,7 @@ class SmallBoid extends Boid {
 
         this.protected_range = 10;
         this.visual_range = 100;
-        this.separation_factor = 0.00004;
+        this.separation_factor = 0.008;
         this.matching_factor = 0.006;
         this.cohesion_factor = 0.0001;
         this.turnfactor = PI / 90;
