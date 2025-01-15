@@ -7,7 +7,7 @@ function setup() {
         window.innerHeight
     );
 
-    for (let x = 0; x < 30; x++) {
+    for (let x = 0; x < 50; x++) {
         boids.push(
             new Boid(
                 x,
