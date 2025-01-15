@@ -7,7 +7,7 @@ function setup() {
         window.innerHeight
     );
 
-    grid = new Grid(width, height, visual_range)
+    grid = new Grid(width, height, visual_range);
 }
 
 function draw() {
