@@ -4,12 +4,14 @@ class Grid {
         this.width = width;
         this.visual_range = visual_range;
         this.boids = [];
+        this.obstacles = [];
         this.#reset_grid();
     }
 
     update() {
         this.#reset_grid();
         this.#populate_grid();
+
         for (let boid of this.boids) {
             let x = Math.floor(boid.pos.x / this.visual_range);
             let y = Math.floor(boid.pos.y / this.visual_range);
@@ -33,7 +35,11 @@ class Grid {
                 }
             }
 
-            boid.update(other_boids);
+            boid.update(other_boids, this.obstacles);
+        }
+
+        for (let obstacle of this.obstacles) {
+            obstacle.show();
         }
     }
 
@@ -68,7 +74,7 @@ class Grid {
 
         for (let y in this.grid) {
             for (let x in this.grid[0]) {
-                fill(color(0, 255, 0, this.grid[y][x].length / this.boids.length * 150));
+                fill(color(0, 255, 0, this.grid[y][x].length / this.boids.length * 255));
                 square(x * this.visual_range, y * this.visual_range, this.visual_range);
             }
         }
@@ -77,6 +83,10 @@ class Grid {
     add_boid(boid) {
         this.#add_boid_to_grid(boid);
         this.boids.push(boid);
+    }
+
+    add_obstacle(obstacle) {
+        this.obstacles.push(obstacle);
     }
 
     #add_boid_to_grid(boid) {
