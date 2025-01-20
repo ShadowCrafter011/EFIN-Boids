@@ -9,7 +9,7 @@ function setup() {
     grid = new Grid(width, innerHeight, 100);
 
     for (let i = 0; i < 50; i++) {
-        grid.add_boid(NewBoid.random(width, height))
+        grid.add_boid(NewBoid.random(i, width, height))
     }
 }
 

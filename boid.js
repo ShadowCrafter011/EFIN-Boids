@@ -19,6 +19,16 @@ class Boid {
         this.wall_margin = 150;
     }
 
+    static random(index, width, height) {
+        return new this(
+            index,
+            Math.random() * width,
+            Math.random() * height,
+            Math.random() - 0.5,
+            Math.random() - 0.5
+        )
+    }
+
     update(boids) {
         let separation = this.separate(boids);
         let matching = this.match(boids);

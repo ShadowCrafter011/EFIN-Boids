@@ -11,13 +11,7 @@ function setup() {
     grid = new Grid(width, height, visual_range);
     
     for (let i = 0; i < 50; i++) {
-        grid.add_boid(new Boid(
-            i,
-            Math.random() * width,
-            Math.random() * height,
-            Math.random(),
-            Math.random()
-        ))
+        grid.add_boid(Boid.random(i, width, height));
     } 
 }
 

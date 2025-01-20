@@ -7,16 +7,8 @@ function setup() {
         window.innerHeight
     );
 
-    for (let x = 0; x < 50; x++) {
-        boids.push(
-            new Boid(
-                x,
-                Math.random() * width,
-                Math.random() * height,
-                Math.random() - 0.5,
-                Math.random() - 0.5
-            )
-        )
+    for (let i = 0; i < 50; i++) {
+        boids.push(Boid.random(i, width, height));
     }
 
     noStroke();

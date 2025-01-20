@@ -1,20 +1,20 @@
 class NewBoid {
-    static max_vel = 3;
-    static min_vel = 2;
-
     constructor(x, y, vx, vy) {
         this.pos = createVector(x, y);
         this.vel = createVector(vx, vy);
+
+        this.max_vel = 3;
+        this.min_vel = 2;
     }
 
-    static random(width, height) {
-        let boid = new NewBoid(
+    static random(index, width, height) {
+        return new this(
+            index,
             Math.random() * width,
             Math.random() * height,
             Math.random() - 0.5,
             Math.random() - 0.5
         );
-        return boid;
     }
 
     update() {
@@ -25,8 +25,8 @@ class NewBoid {
     }
 
     clamp_velocity() {
-        if (this.vel.mag() > NewBoid.max_vel) this.vel.setMag(NewBoid.max_vel);
-        if (this.vel.mag() < NewBoid.min_vel) this.vel.setMag(NewBoid.min_vel);
+        if (this.vel.mag() > this.max_vel) this.vel.setMag(this.max_vel);
+        if (this.vel.mag() < this.min_vel) this.vel.setMag(this.min_vel);
     }
 
     show() {
