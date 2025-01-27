@@ -7,6 +7,12 @@ class NewBoid {
         this.max_vel = 3;
         this.min_vel = 2;
         this.max_angular_velocity = 1 * PI / 360;
+
+        this.visual_range = 100;
+        this.blind_spot_angle = 90;
+        this.num_rays = 50;
+        this.rays = [];
+        this.calculate_rays();
     }
 
     static random(index, width, height) {
@@ -25,12 +31,39 @@ class NewBoid {
         this.clamp_velocity();
 
         this.pos.add(this.vel);
+        for (let ray of this.rays) {
+            ray.add(this.vel);
+        }
 
         this.show();
+        this.show_rays();
     }
 
     separate(boids, obstacles) {
+        noStroke();
+        fill("green");
+        for (let ray of this.rays) {
+            for (let obstacle of obstacles) {
+                let intersection = obstacle.intersection_with(ray);
+                if (intersection) {
+                    circle(intersection.x, intersection.y, 10);
+                }
+            }
+        }
         return createVector(0, 1);
+    }
+
+    calculate_rays() {
+        let ray_angle_dist = (360 - this.blind_spot_angle) / this.num_rays;
+        ray_angle_dist *= PI;
+        ray_angle_dist /= 180;
+        for (let i = 0; i < this.num_rays; i++) {
+            let rotated = this.vel.copy().normalize().rotate((i - this.num_rays / 2) * ray_angle_dist);
+            rotated.setMag(this.visual_range);
+            this.rays.push(
+                new Ray(this.pos.x, this.pos.y, this.pos.x + rotated.x, this.pos.y + rotated.y)
+            )
+        }
     }
 
     rotate_towards(...directions) {
@@ -47,6 +80,9 @@ class NewBoid {
         if (delta_angle < -PI) delta_angle = 2 * PI + delta_angle;
         let rotation = Math.min(this.max_angular_velocity, Math.max(-this.max_angular_velocity, delta_angle));
         this.vel.rotate(rotation);
+        for (let ray of this.rays) {
+            ray.rotate(rotation);
+        }
     }
 
     clamp_velocity() {
@@ -67,5 +103,11 @@ class NewBoid {
             left.x, left.y,
             right.x, right.y
         )
+    }
+
+    show_rays() {
+        stroke("white");
+        this.rays.forEach(ray => ray.show());
+        noStroke();
     }
 }

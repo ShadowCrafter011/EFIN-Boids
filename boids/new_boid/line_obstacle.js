@@ -4,6 +4,9 @@ class LineObstacle extends Line {
     }
 
     ray_dist(ray) {
-        return this.intersection(ray);
+        let intersection = this.intersection_with(ray);
+        if (intersection) {
+            return ray.origin.dist(intersection);
+        }
     }
 }
