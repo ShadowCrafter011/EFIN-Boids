@@ -1,10 +1,12 @@
 class NewBoid {
-    constructor(x, y, vx, vy) {
+    constructor(index, x, y, vx, vy) {
+        this.index = index;
         this.pos = createVector(x, y);
         this.vel = createVector(vx, vy);
 
         this.max_vel = 3;
         this.min_vel = 2;
+        this.max_angular_velocity = 1 * PI / 360;
     }
 
     static random(index, width, height) {
@@ -17,11 +19,34 @@ class NewBoid {
         );
     }
 
-    update() {
-        this.pos.add(this.vel);
+    update(boids, obstacles) {
+        let separation = this.separate(boids, obstacles);
+        this.rotate_towards(separation);
         this.clamp_velocity();
 
+        this.pos.add(this.vel);
+
         this.show();
+    }
+
+    separate(boids, obstacles) {
+        return createVector(0, 1);
+    }
+
+    rotate_towards(...directions) {
+        let direction = createVector(0, 0);
+        for (let dir of directions) {
+            direction.add(dir);
+        }
+
+        if (direction.mag() == 0) return;
+
+        let desired_angle = createVector(1, 0).angleBetween(direction);
+        let delta_angle = desired_angle - createVector(1, 0).angleBetween(this.vel);
+        if (delta_angle > PI) delta_angle = -2 * PI - delta_angle;
+        if (delta_angle < -PI) delta_angle = 2 * PI + delta_angle;
+        let rotation = Math.min(this.max_angular_velocity, Math.max(-this.max_angular_velocity, delta_angle));
+        this.vel.rotate(rotation);
     }
 
     clamp_velocity() {
