@@ -1,5 +1,7 @@
-class NewBoid {
+class NewBoid extends CircleObstacle {
     constructor(index, x, y, vx, vy) {
+        super(x, y, 10);
+
         this.index = index;
         this.pos = createVector(x, y);
         this.vel = createVector(vx, vy);
@@ -7,7 +9,7 @@ class NewBoid {
         this.max_vel = 3;
         this.min_vel = 2;
 
-        this.protected_range = 100;
+        this.protected_range = 10;
         this.blind_spot_angle = 90;
         this.num_rays = 50;
         this.rays = [];
@@ -39,6 +41,7 @@ class NewBoid {
         }
 
         this.show();
+        super.show();
         // this.show_rays();
     }
 
@@ -48,7 +51,7 @@ class NewBoid {
         let min_dist_dir = createVector(0, 0);
         let min_dist = this.protected_range;
         for (let ray of this.rays) {
-            let ray_dist = ray.calculate_min_dist(obstacles);
+            let ray_dist = ray.calculate_min_dist(obstacles.concat(boids));
             if (ray_dist > max_dist){
                 max_dist_dir = ray.direction();
                 max_dist = ray_dist;

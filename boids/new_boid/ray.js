@@ -1,4 +1,4 @@
-class Ray extends Line {
+class Ray extends LineObstacle {
     constructor(...args) {
         super(...args);
 
