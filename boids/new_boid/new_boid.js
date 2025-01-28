@@ -6,20 +6,23 @@ class NewBoid {
 
         this.max_vel = 3;
         this.min_vel = 2;
-        this.max_angular_velocity = 1 * PI / 360;
 
-        this.visual_range = 100;
+        this.protected_range = 100;
         this.blind_spot_angle = 90;
         this.num_rays = 50;
         this.rays = [];
         this.calculate_rays();
     }
 
+    static ease_in_circ(x) {
+        return 1 - Math.sqrt(1 - Math.pow(x, 2));
+    }
+
     static random(index, width, height) {
         return new this(
             index,
-            Math.random() * width,
-            Math.random() * height,
+            (Math.random() * (width / 2)) + width / 4,
+            (Math.random() * (height / 2)) + height / 4,
             Math.random() - 0.5,
             Math.random() - 0.5
         );
@@ -36,30 +39,49 @@ class NewBoid {
         }
 
         this.show();
-        this.show_rays();
+        // this.show_rays();
     }
 
     separate(boids, obstacles) {
-        noStroke();
-        fill("green");
+        let max_dist_dir = createVector(0, 0);
+        let max_dist = 0;
+        let min_dist_dir = createVector(0, 0);
+        let min_dist = this.protected_range;
         for (let ray of this.rays) {
-            for (let obstacle of obstacles) {
-                let intersection = obstacle.intersection_with(ray);
-                if (intersection) {
-                    circle(intersection.x, intersection.y, 10);
-                }
+            let ray_dist = ray.calculate_min_dist(obstacles);
+            if (ray_dist > max_dist){
+                max_dist_dir = ray.direction();
+                max_dist = ray_dist;
             }
+            if (ray_dist < min_dist) {
+                min_dist_dir = ray.direction();
+                min_dist = ray_dist;
+            }
+
         }
-        return createVector(0, 1);
+
+        let dir;
+        if (max_dist == this.protected_range && min_dist != this.protected_range) {
+            dir = min_dist_dir.mult(-1);
+        } else {
+            dir = max_dist_dir;
+        }
+
+        let normalized_dist = min_dist / this.protected_range;
+        let inverted_dist = 1 - normalized_dist;
+        return dir.setMag(NewBoid.ease_in_circ(inverted_dist));
     }
 
     calculate_rays() {
         let ray_angle_dist = (360 - this.blind_spot_angle) / this.num_rays;
         ray_angle_dist *= PI;
         ray_angle_dist /= 180;
+        let mult = 1;
         for (let i = 0; i < this.num_rays; i++) {
-            let rotated = this.vel.copy().normalize().rotate((i - this.num_rays / 2) * ray_angle_dist);
-            rotated.setMag(this.visual_range);
+            let rotation = Math.ceil(i / 2) * mult * ray_angle_dist;
+            mult *= -1;
+            let rotated = this.vel.copy().normalize().rotate(rotation);
+            rotated.setMag(this.protected_range);
             this.rays.push(
                 new Ray(this.pos.x, this.pos.y, this.pos.x + rotated.x, this.pos.y + rotated.y)
             )
@@ -78,7 +100,7 @@ class NewBoid {
         let delta_angle = desired_angle - createVector(1, 0).angleBetween(this.vel);
         if (delta_angle > PI) delta_angle = -2 * PI - delta_angle;
         if (delta_angle < -PI) delta_angle = 2 * PI + delta_angle;
-        let rotation = Math.min(this.max_angular_velocity, Math.max(-this.max_angular_velocity, delta_angle));
+        let rotation = 0.5 * PI * direction.mag();
         this.vel.rotate(rotation);
         for (let ray of this.rays) {
             ray.rotate(rotation);

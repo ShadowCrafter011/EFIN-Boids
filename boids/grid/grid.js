@@ -6,6 +6,7 @@ class Grid {
         this.boids = [];
         this.obstacles = [];
         this.#reset_grid();
+        this.boids_on_screen = -1;
     }
 
     update() {
@@ -40,6 +41,19 @@ class Grid {
 
         for (let obstacle of this.obstacles) {
             obstacle.show();
+        }
+    }
+
+    log_boids_on_screen() {
+        let boids_on_screen = 0;
+        for (let boid of this.boids) {
+            if (boid.pos.x > 0 && boid.pos.x < width && boid.pos.y > 0 && boid.pos.y < height) {
+                boids_on_screen++;
+            }
+        }
+        if (boids_on_screen != this.boids_on_screen) {
+            console.log(`There are ${boids_on_screen} boids on screen`);
+            this.boids_on_screen = boids_on_screen;
         }
     }
 

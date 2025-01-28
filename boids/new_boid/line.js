@@ -10,6 +10,11 @@ class Line {
         noStroke();
     }
 
+    mag() {
+        let p1_p2 = this.p2.copy().sub(this.p1);
+        return p1_p2.mag();
+    }
+
     intersection_with(line) {
         let x1 = this.p1.x;
         let x2 = this.p2.x;

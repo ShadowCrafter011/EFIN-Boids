@@ -9,8 +9,10 @@ function setup() {
     grid = new Grid(width, innerHeight, 100);
 
     for (let i = 0; i < 50; i++) {
-        grid.add_boid(NewBoid.random(i, width, height))
+        grid.add_boid(NewBoid.random(i, width, height));
     }
+
+    // grid.add_boid(new NewBoid(0, width / 2, height / 2, 1, 0));
 
     let margin = 50;
     let bottom_margin = height - margin;
@@ -25,4 +27,5 @@ function draw() {
     background(0);
 
     grid.update();
+    grid.log_boids_on_screen();
 }
