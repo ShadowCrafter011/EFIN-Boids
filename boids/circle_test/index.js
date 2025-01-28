@@ -13,9 +13,11 @@ function draw() {
     controllable_line.p2 = createVector(mouseX, mouseY);
     controllable_line.show();
     test_circle.show();
-    let intersection = test_circle.intersection_with(controllable_line);
-    if (intersection) {
+    let intersections = test_circle.intersection_with(controllable_line);
+    if (intersections?.length > 0) {
         fill("green");
-        circle(intersection.x, intersection.y, 10);
+        for (let inter of intersections) {
+            circle(inter.x, inter.y, 10);
+        }
     }
 }

@@ -9,7 +9,7 @@ class NewBoid extends CircleObstacle {
         this.max_vel = 3;
         this.min_vel = 2;
 
-        this.protected_range = 10;
+        this.protected_range = 100;
         this.blind_spot_angle = 90;
         this.num_rays = 50;
         this.rays = [];

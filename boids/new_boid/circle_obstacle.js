@@ -18,6 +18,15 @@ class CircleObstacle extends Obstacle {
         noStroke();
     }
 
+    ray_dist(ray) {
+        let intersections = this.intersection_with(ray);
+        if (intersections?.length > 0) {
+            let min_dist = Number.MAX_VALUE;
+            intersections.forEach(inter => min_dist = Math.min(min_dist, ray.origin.dist(inter)));
+            return min_dist;
+        }
+    }
+
     intersection_with(line) {
         let tline = line.copy().sub(this.pos);
         let dx = tline.p2.x - tline.p1.x;
@@ -32,12 +41,21 @@ class CircleObstacle extends Obstacle {
         x1 /= dr ** 2;
         let y1 = -D * dx + Math.abs(dy) * Math.sqrt(discriminant);
         y1 /= dr ** 2;
+        let point1 = createVector(x1, y1).add(this.pos);
 
         if (discriminant == 0) {
-            let point = createVector(x1, y1).add(this.pos);
-            if (line.contains_point(point)) return point;
+            if (line.contains_point(point1)) return [point1];
+        } else {
+            let x2 = D * dy - CircleObstacle.sgn(dy) * dx * Math.sqrt(discriminant);
+            x2 /= dr ** 2;
+            let y2 = -D * dx - Math.abs(dy) * Math.sqrt(discriminant);
+            y2 /= dr ** 2;
+            let point2 = createVector(x2, y2).add(this.pos);
+
+            let points = [];
+            if (line.contains_point(point1)) points.push(point1);
+            if (line.contains_point(point2)) points.push(point2);
+            return points;
         }
-
-
     }
 }
