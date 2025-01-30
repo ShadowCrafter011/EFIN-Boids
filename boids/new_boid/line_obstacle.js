@@ -1,11 +1,14 @@
 class LineObstacle extends Obstacle {
-    constructor(x1, y1, x2, y2) {
+    constructor(x1, y1, x2, y2, normal, invisible = false) {
         super();
+        this.invisible = invisible;
+        this.normal = normal;
         this.p1 = createVector(x1, y1);
         this.p2 = createVector(x2, y2);
     }
 
     show() {
+        if (this.invisible) return;
         stroke("white");
         line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
         noStroke();

@@ -99,6 +99,10 @@ class Grid {
         this.boids.push(boid);
     }
 
+    add_boids(boids) {
+        boids.forEach(boid => this.add_boid(boid));
+    }
+
     add_obstacle(obstacle) {
         this.obstacles.push(obstacle);
     }
