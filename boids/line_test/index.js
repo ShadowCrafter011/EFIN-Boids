@@ -3,11 +3,11 @@ var controllable_line, lines;
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
 
-    controllable_line = new Line(width / 2 - 100, height / 2 + 100, 0, 0);
+    controllable_line = new LineObstacle(width / 2 - 100, height / 2 + 100, 0, 0);
     lines = [
         controllable_line,
-        new Line(0, 100, width, 100),
-        new Line(0, 0, width - 100, height - 100)
+        new LineObstacle(0, 100, width, 100),
+        new LineObstacle(0, 0, width - 100, height - 100)
     ];
 }
 
