@@ -59,6 +59,10 @@ iframe {
     pointer-events: none;
 }
 
+.margin-top {
+    margin-top: 3rem;
+}
+
 .iframe-container {
     position: relative;
 }
@@ -99,6 +103,12 @@ iframe {
 
 .main-header img {
     height: 70px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: start;
+    gap: 0.5rem;
 }
 
 @media screen and (max-width: 999px) {
