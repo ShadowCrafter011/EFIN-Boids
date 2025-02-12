@@ -24,19 +24,15 @@ class NewBoid {
     static random(width, height) {
         return new this(
             index,
-            (Math.random() * (width / 2)) + width / 4,
-            (Math.random() * (height / 2)) + height / 4,
+            Math.random() * (width / 2) + width / 4,
+            Math.random() * (height / 2) + height / 4,
             Math.random() - 0.5,
             Math.random() - 0.5
         );
     }
 
     static random_vel(x, y) {
-        return new this(
-            x, y,
-            Math.random() - 0.5,
-            Math.random() - 0.5
-        )
+        return new this(x, y, Math.random() - 0.5, Math.random() - 0.5);
     }
 
     update(boids, obstacles) {
@@ -55,11 +51,11 @@ class NewBoid {
             ray.add(this.vel);
         }
 
-        if (!this.on_screen()) {
-            this.pos = createVector(width / 2, height / 2);
-            this.rays = [];
-            this.calculate_rays();
-        }
+        // if (!this.on_screen()) {
+        //     this.pos = createVector(width / 2, height / 2);
+        //     this.rays = [];
+        //     this.calculate_rays();
+        // }
 
         this.show();
         // this.show_rays();
@@ -68,7 +64,7 @@ class NewBoid {
     cohese(boids) {
         let neigh_boids = 0;
         let average = createVector(0, 0);
-        this.loop_boids(boids, this.visual_range, boid => {
+        this.loop_boids(boids, this.visual_range, (boid) => {
             neigh_boids++;
             average.add(boid.pos);
         });
@@ -80,7 +76,7 @@ class NewBoid {
     match(boids) {
         let neigh_boids = 0;
         let average = createVector(0, 0);
-        this.loop_boids(boids, this.visual_range, boid => {
+        this.loop_boids(boids, this.visual_range, (boid) => {
             neigh_boids++;
             average.add(boid.vel);
         });
@@ -92,9 +88,10 @@ class NewBoid {
     separate_boids(boids) {
         let average = createVector(0, 0);
         let num_boids = 0;
-        this.loop_boids(boids, this.protected_range, boid => {
+        this.loop_boids(boids, this.protected_range, (boid) => {
             let boid_this = this.pos.copy().sub(boid.pos);
-            let normalized_dist = this.pos.dist(boid.pos) / this.protected_range;
+            let normalized_dist =
+                this.pos.dist(boid.pos) / this.protected_range;
             boid_this.setMag(1 - normalized_dist);
             average.add(boid_this);
             num_boids++;
@@ -107,7 +104,8 @@ class NewBoid {
 
     separate_obstacles(obstacles) {
         let max_dist_ray, min_dist_ray;
-        let max_dist = 0, min_dist = this.protected_range;
+        let max_dist = 0,
+            min_dist = this.protected_range;
         for (let ray of this.rays) {
             let dist = ray.calculate_min_dist(obstacles);
             if (dist > max_dist) {
@@ -119,13 +117,13 @@ class NewBoid {
                 min_dist_ray = ray;
             }
         }
-        
+
         let direction = max_dist_ray.direction();
-        
+
         if (!max_dist_ray.collided && min_dist_ray.collided) {
             direction = min_dist_ray.min_dist_obstacle.normal;
         }
-        
+
         let normalized_dist = min_dist / this.protected_range;
 
         return direction.setMag(NewBoid.ease_in_circ(1 - normalized_dist));
@@ -150,8 +148,13 @@ class NewBoid {
             let rotated = this.vel.copy().normalize().rotate(rotation);
             rotated.setMag(this.protected_range - i);
             this.rays.push(
-                new Ray(this.pos.x, this.pos.y, this.pos.x + rotated.x, this.pos.y + rotated.y)
-            )
+                new Ray(
+                    this.pos.x,
+                    this.pos.y,
+                    this.pos.x + rotated.x,
+                    this.pos.y + rotated.y
+                )
+            );
         }
     }
 
@@ -191,20 +194,20 @@ class NewBoid {
         noStroke();
         fill("white");
         let normal = this.vel.copy().normalize().mult(3);
-        let rotated = this.vel.copy().normalize().rotate(PI / 2).mult(2.5);
+        let rotated = this.vel
+            .copy()
+            .normalize()
+            .rotate(PI / 2)
+            .mult(2.5);
         let front = this.pos.copy().add(normal);
         let left = this.pos.copy().add(rotated).sub(normal);
         let right = this.pos.copy().sub(rotated).sub(normal);
-        triangle(
-            front.x, front.y,
-            left.x, left.y,
-            right.x, right.y
-        )
+        triangle(front.x, front.y, left.x, left.y, right.x, right.y);
     }
 
     show_rays() {
         stroke("white");
-        this.rays.forEach(ray => ray.show());
+        this.rays.forEach((ray) => ray.show());
         noStroke();
     }
 }

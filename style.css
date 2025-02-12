@@ -1,15 +1,18 @@
 :root {
     background-color: #363636;
     color: white;
-    
+
     font-family: "Roboto Mono", serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
 
-    --link-color: rgb(150, 150, 150);
+    --link-color: rgb(179, 179, 179);
     --header-color: #00b6b6;
     --iframe-scale-factor: 0.4;
+
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 body {
@@ -29,7 +32,7 @@ h2 {
 
 a {
     color: var(--link-color);
-    transition: color .25s ease-in-out;
+    transition: color 0.25s ease-in-out;
 }
 
 a:hover {
@@ -53,7 +56,7 @@ iframe {
     width: 100vw;
     transform: scale(var(--iframe-scale-factor));
     position: absolute;
-    cursor: pointer;
+    pointer-events: none;
 }
 
 .iframe-container {
@@ -62,8 +65,8 @@ iframe {
 
 .iframe-spacing {
     height: calc(100vh * var(--iframe-scale-factor));
-    width: calc(100vw * var(--iframe-scale-factor));
-
+    width: calc(100vw * var(--iframe-scale-factor) + 0.5rem);
+    cursor: pointer;
 }
 
 .right {
@@ -73,6 +76,29 @@ iframe {
 
 .spacing-right {
     float: right;
+}
+
+.img-right {
+    float: right;
+    padding-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-desc {
+    color: var(--link-color);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.main-header img {
+    height: 70px;
 }
 
 @media screen and (max-width: 999px) {

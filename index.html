@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boids list</title>
+    <title>Boids</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/parrot.png" type="image/x-icon">
     <script src="index.js" defer></script>
 </head>
 <body>
-    <h1>Boids</h1>
+    <div class="main-header">
+        <h1>Boids</h1>
+        <img src="images/parrot.png">
+    </div>
 
     <phone-disclaimer>
         <div>
@@ -31,76 +35,98 @@
                 <li><strong>Alignment</strong>: boids attempt to match the velocities of their neighbors</li>
                 <li><strong>Cohesion</strong>: boids move toward the center of mass of their neighbors</li>
             </ul>
+            <em><a href="https://www.flaticon.com/free-icons/bird" title="bird icons">Bird icon created by Mihimihi - Flaticon</a></em>
+        </p>
+        <br>
+        <p>
+            <h2>Code</h2>
+            All the code for this project can be found on <a href="https://github.com/ShadowCrafter011/EFIN-Boids" target="_blank" rel="noopener noreferrer">GitHub</a>.
         </p>
         <br>
         <p>
             <h2>Project description</h2>
             In this project I've tried to programm my own boids. Some math aspects were inspired by the article mentioned in the intorduction but modified to fit my requirements. I've also extended the boids obstacle abvoidance behaviour in a realistic albeit not computationally efficient way.
-            <p>
-                For the project I've heavily used object oriented programming.
-            </p>
+            <p>For the project I've heavily used object oriented programming.</p>
+            <p>Any simulations shown inside text can be clicked on to open a fullscreen view.</p>
         </p>
         <br>
         <p>
-            <h2>First simulation attempt</h2>
+            <h2>First simulation</h2>
             <div class="iframe-container">
-                <a href="boids/normal/index.html">
-                    <iframe src="boids/normal/index.html" frameborder="0" class="right"></iframe>
-                </a>
-                <div class="iframe-spacing spacing-right"></div>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium, eos minus qui veritatis ab aperiam temporibus ea tempore magnam deserunt corporis incidunt in voluptate hic. Aliquam perferendis magni minus possimus non commodi optio. Voluptates tenetur eum explicabo incidunt beatae fuga aut est reprehenderit consectetur voluptas, modi perspiciatis officiis facilis dolores ullam aperiam assumenda, in quod ea esse architecto molestiae natus non illum. Praesentium, qui inventore! Sequi dignissimos corporis unde porro magni veritatis ex officiis eos, quo sed quidem numquam, nihil saepe, repudiandae quis modi optio tempore laborum. Labore totam nihil quibusdam accusantium quos atque error reprehenderit laborum? Culpa neque itaque numquam in voluptatibus reprehenderit ducimus odit nulla iste voluptatem eius modi, optio repudiandae asperiores fuga dolorum doloribus pariatur reiciendis quam exercitationem recusandae tempora? Sapiente nesciunt eum a dolore quaerat veritatis totam sequi earum accusantium officia placeat dolores obcaecati ad ipsa modi delectus reprehenderit facilis perspiciatis reiciendis, aliquid labore atque iste neque. Minus quia saepe quo numquam ab, sed omnis mollitia voluptas eos praesentium? Ut soluta rem ad minus quo. Saepe cum ea veritatis commodi cupiditate nihil, incidunt tenetur perspiciatis ullam, corrupti sed hic dolorum ab totam dicta atque. Dolore, praesentium doloremque illum ad repellendus temporibus quas eveniet sint magni eaque maiores at alias soluta autem velit nobis reprehenderit hic et perferendis quis delectus natus? Eveniet, sequi placeat eius laborum tempore, nobis reprehenderit voluptatibus, exercitationem praesentium libero delectus. Unde necessitatibus iusto, et quidem, tempora laudantium eius velit dolor illum id labore nisi tempore temporibus facilis enim incidunt, consequuntur ad modi aperiam culpa. Eum illum asperiores adipisci facere, magni, minus minima consequuntur, necessitatibus magnam hic doloremque modi soluta totam ex incidunt fugiat non dolores laborum debitis autem accusamus repellat? Beatae aspernatur dolore nisi illo necessitatibus, cumque, quidem sed minima laborum at fugiat ut saepe soluta ad voluptates consectetur adipisci. Quia impedit officiis, necessitatibus laborum quis laboriosam qui magni atque alias, possimus totam officia nihil eaque ratione dignissimos debitis eum. Officiis necessitatibus fugiat deleniti nam qui ipsam totam neque corporis quidem porro, nulla impedit cupiditate dolores quas ipsum perspiciatis magnam reiciendis explicabo? Possimus sit dignissimos quas nostrum veritatis illum a nemo maxime quod illo beatae natus fugit aliquid voluptates neque totam dolore tempora ab, hic nisi architecto. Tempore mollitia aperiam aliquid vero quas corporis assumenda ex enim maiores ea dolore voluptatem molestiae quia, excepturi ipsam sint possimus veniam cupiditate, magnam ipsum commodi ipsa sequi? Nemo id tempore nihil cupiditate rerum libero tenetur tempora delectus iure, aliquam rem exercitationem maxime deleniti! Iusto ad repellat earum quidem voluptate dolorem aut voluptates quisquam fuga, quaerat neque error minima sequi amet doloremque laudantium ipsum voluptas. Animi eius culpa harum atque placeat esse aut assumenda adipisci ipsa, veniam labore nesciunt totam enim nobis ullam recusandae libero dolores incidunt dolorum iusto eligendi repellat. Vero incidunt soluta porro rerum explicabo. Aut voluptatem reprehenderit facilis in odit accusamus alias delectus laudantium, ex obcaecati fugit quod debitis blanditiis voluptates suscipit illum, molestias error ipsa? Quidem praesentium maiores necessitatibus officiis nemo enim quia magni quibusdam cupiditate numquam. Distinctio sint perferendis omnis velit pariatur.
+                <iframe src="boids/normal/" frameborder="0" class="right"></iframe>
+                <a href="boids/normal/" class="iframe-spacing spacing-right"></a>
+                For my first attempt everything is done using vectors. As an example separation loops over all nearby boids and adds a vector from the current boid to the other boid to a sum. The vectors magnitude is the resized proportionally to the amount of nearby boids and by some factor. This separation force is then simply added to the boids velocity. Cohesion and alignment work in a very similar fasion. Steering away from the edges is done by adding a vector which points away from the wall to the velocity if the boid is within a certain margin of the edge. This means that the boids can leave the confines of the screen for a short period of time but it is very effective at keeping them inside the screen.
+                <p>
+                    I've extended this type of boid to create a few slightly different simulations:
+                    <ul>
+                        <li><a href="boids/normal/">Normal boids</a>: The first boid simulation I made and the one shown here.</li>
+                        <li><a href="boids/small/">Small boids</a>: The boids are "smaller" which means their perception range is shorter and they appear to fly slower. This means they form a few small flocks on the screen.</li>
+                        <li><a href="boids/big_flock/">Big flock</a>: This simulation uses the small boids but with a perception range that spans over the entire screen. They form one big flock in the screen. The intricacy here is that they always tend to form a circle where half the boids rotate in one direction whilst the other half rotates in the other direction. This sort of behaviour is not very reminiscent of birds but might show good behaviour for a school of fish.</li>
+                        <li><a href="boids/grid/">Grid</a>: By organising the boids into grid cells the size of their perception range radius I can ensure that the only other boids which on boid can see are in its cell or the 9 adjecent ones. For <a href="boids/extra_small/">larger simulations</a> with much smaller boids this is a big optimization. Granted the simulation looks way worse and the individiual flocking behaviour is almost impossible to see. That's why I stuck with smaller simulations with larger boids. I kept using the grid however since it abstracted some code away which I needed for each simulation.</li>
+                        <li><a href="boids/obstacles/">Circular obstacle</a>: For this simulation I made the boids steer away from the obstacle in the center if they are heading straight for it. This resulted in the most realistic looking obstacle avoidance but it can happen that boids get pushed into the obstacle. This is usually the case if the boid is flying close to a tangent line and gets pushed into it by separation forces.</li>
+                    </ul>
+                </p>
             </div>
+        </p>
+        <br>
+        <p>
+            <h2>Obstacle avoiding boid</h2>
+            <div class="img-right">
+                <img src="images/rays.png" alt="Boid with rays" width="270px">
+                <span class="img-desc">Boid with its vision rays</span>
+            </div>
+            For this simulation I wanted the boids to steer away from obstacles instead of just adding a vector away from the obstacle to their velocity. This could intern be extended so the boids see each other as obstacle and also steer away from each other. To start things off I gave each boid vision rays as seen in the image. Those rays would then need to find intersections with other lines on the screen. I wanted these other lines to be normal lines and circles. For the line one line intersection I tried calculating the formula myself and got very close to getting it to work. However there was a small bug left and for the life of me I couldn't figure it out. So I ended up using the formula I found on <a href="https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection" target="_blank" rel="noopener noreferrer">Wikipedia</a>. With that I had line-line intersections working. You can check it out in <a href="/boids/line_test/">this demo</a>. For the line-circle intersection I went straight to the internet and found a nicely working formula on <a href="https://mathworld.wolfram.com/Circle-LineIntersection.html" target="_blank" rel="noopener noreferrer">wolfram.com</a>. Here's the <a href="boids/circle_test/">demo</a> for that. When a boid detects an obstacle on one of its rays it steers away from it. Like mentioned above I wanted to treat each boid as an obstacle in circular shape. However this turned out to be horrendously slow as each ray of each boid had to check if it intersected with each other boid in its near vicinity. This aproach turned out well-ish to confine the boid in the screen. If the boid steered with about a 45° angle onto two line obstacle in a 90° angle it could wiggle its way out of the screen. This is shown in the video
         </p>
     </main>
 
     <!---
     <div class="boids" id="boids">
-        <a href="boids/normal/index.html">
+        <a href="boids/normal/">
             <div class="boids-outer">
                 <h3>Normal Boids</h3>
-                <iframe src="boids/normal/index.html" frameborder="0"></iframe>
+                <iframe src="boids/normal/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/small/index.html">
+        <a href="boids/small/">
             <div class="boids-outer">
                 <h3>Small Boids</h3>
-                <iframe src="boids/small/index.html" frameborder="0"></iframe>
+                <iframe src="boids/small/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/big_flock/index.html">
+        <a href="boids/big_flock/">
             <div class="boids-outer">
                 <h3>Big Flock</h3>
-                <iframe src="boids/big_flock/index.html" frameborder="0"></iframe>
+                <iframe src="boids/big_flock/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/grid/index.html">
+        <a href="boids/grid/">
             <div class="boids-outer">
                 <h3>Grid</h3>
-                <iframe src="boids/grid/index.html" frameborder="0"></iframe>
+                <iframe src="boids/grid/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/obstacles/index.html">
+        <a href="boids/obstacles/">
             <div class="boids-outer">
                 <h3>Obstacle</h3>
-                <iframe src="boids/obstacles/index.html" frameborder="0"></iframe>
+                <iframe src="boids/obstacles/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/line_test/index.html">
+        <a href="boids/line_test/">
             <div class="boids-outer">
                 <h3>Line test</h3>
-                <iframe src="boids/line_test/index.html" frameborder="0"></iframe>
+                <iframe src="boids/line_test/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/circle_test/index.html">
+        <a href="boids/circle_test/">
             <div class="boids-outer">
                 <h3>Circle test</h3>
-                <iframe src="boids/circle_test/index.html" frameborder="0"></iframe>
+                <iframe src="boids/circle_test/" frameborder="0"></iframe>
             </div>
         </a>
-        <a href="boids/new_boid/index.html">
+        <a href="boids/new_boid/">
             <div class="boids-outer">
                 <h3>New Boid</h3>
-                <iframe src="boids/new_boid/index.html" frameborder="0"></iframe>
+                <iframe src="boids/new_boid/" frameborder="0"></iframe>
             </div>
         </a>
     </div>
