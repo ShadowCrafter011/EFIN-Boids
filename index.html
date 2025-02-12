@@ -4,10 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boids list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
 </head>
 <body>
+    <h1>Boids</h1>
+
+    <phone-disclaimer>
+        <div>
+            This webpage has been designed for devices with a width larger than 1000px. It is strongly recommended to view this page on a modern laptop or computer.
+        </div>
+        <button type="button" id="view-page-button">View page anyway</button>
+    </phone-disclaimer>
+
+    <main>
+        <div>
+            <em>Boids as described on <a href="https://people.ece.cornell.edu/land/courses/ece4760/labs/s2021/Boids/Boids.html" target="_blank" rel="noopener noreferrer">cornell.edu</a></em>
+        </div>
+        <p>
+            <a href="https://en.wikipedia.org/wiki/Boids" target="_blank" rel="noopener noreferrer">Boids</a> is an artificial life program that produces startlingly realistic simulations of the flocking behavior of birds. Each "boid" (which is an abbreviation of "bird-oid object") follows a very simple set of rules. These rules can be summarized as follows:
+            <ul>
+                <li><strong>Separation</strong>: boids move away from other boids that are too close</li>
+                <li><strong>Alignment</strong>: boids attempt to match the velocities of their neighbors</li>
+                <li><strong>Cohesion</strong>: boids move toward the center of mass of their neighbors</li>
+            </ul>
+        </p>
+        <br>
+        <p>
+            <h2>Project description</h2>
+            In this project I've tried to programm my own boids. Some math aspects were inspired by the article mentioned in the intorduction but modified to fit my requirements. I've also extended the boids obstacle abvoidance behaviour in a realistic albeit not computationally efficient way.
+            <p>
+                For the project I've heavily used object oriented programming.
+            </p>
+        </p>
+        <br>
+        <p>
+            <h2>First simulation attempt</h2>
+            <div class="iframe-container">
+                <a href="boids/normal/index.html">
+                    <iframe src="boids/normal/index.html" frameborder="0" class="right"></iframe>
+                </a>
+                <div class="iframe-spacing spacing-right"></div>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium, eos minus qui veritatis ab aperiam temporibus ea tempore magnam deserunt corporis incidunt in voluptate hic. Aliquam perferendis magni minus possimus non commodi optio. Voluptates tenetur eum explicabo incidunt beatae fuga aut est reprehenderit consectetur voluptas, modi perspiciatis officiis facilis dolores ullam aperiam assumenda, in quod ea esse architecto molestiae natus non illum. Praesentium, qui inventore! Sequi dignissimos corporis unde porro magni veritatis ex officiis eos, quo sed quidem numquam, nihil saepe, repudiandae quis modi optio tempore laborum. Labore totam nihil quibusdam accusantium quos atque error reprehenderit laborum? Culpa neque itaque numquam in voluptatibus reprehenderit ducimus odit nulla iste voluptatem eius modi, optio repudiandae asperiores fuga dolorum doloribus pariatur reiciendis quam exercitationem recusandae tempora? Sapiente nesciunt eum a dolore quaerat veritatis totam sequi earum accusantium officia placeat dolores obcaecati ad ipsa modi delectus reprehenderit facilis perspiciatis reiciendis, aliquid labore atque iste neque. Minus quia saepe quo numquam ab, sed omnis mollitia voluptas eos praesentium? Ut soluta rem ad minus quo. Saepe cum ea veritatis commodi cupiditate nihil, incidunt tenetur perspiciatis ullam, corrupti sed hic dolorum ab totam dicta atque. Dolore, praesentium doloremque illum ad repellendus temporibus quas eveniet sint magni eaque maiores at alias soluta autem velit nobis reprehenderit hic et perferendis quis delectus natus? Eveniet, sequi placeat eius laborum tempore, nobis reprehenderit voluptatibus, exercitationem praesentium libero delectus. Unde necessitatibus iusto, et quidem, tempora laudantium eius velit dolor illum id labore nisi tempore temporibus facilis enim incidunt, consequuntur ad modi aperiam culpa. Eum illum asperiores adipisci facere, magni, minus minima consequuntur, necessitatibus magnam hic doloremque modi soluta totam ex incidunt fugiat non dolores laborum debitis autem accusamus repellat? Beatae aspernatur dolore nisi illo necessitatibus, cumque, quidem sed minima laborum at fugiat ut saepe soluta ad voluptates consectetur adipisci. Quia impedit officiis, necessitatibus laborum quis laboriosam qui magni atque alias, possimus totam officia nihil eaque ratione dignissimos debitis eum. Officiis necessitatibus fugiat deleniti nam qui ipsam totam neque corporis quidem porro, nulla impedit cupiditate dolores quas ipsum perspiciatis magnam reiciendis explicabo? Possimus sit dignissimos quas nostrum veritatis illum a nemo maxime quod illo beatae natus fugit aliquid voluptates neque totam dolore tempora ab, hic nisi architecto. Tempore mollitia aperiam aliquid vero quas corporis assumenda ex enim maiores ea dolore voluptatem molestiae quia, excepturi ipsam sint possimus veniam cupiditate, magnam ipsum commodi ipsa sequi? Nemo id tempore nihil cupiditate rerum libero tenetur tempora delectus iure, aliquam rem exercitationem maxime deleniti! Iusto ad repellat earum quidem voluptate dolorem aut voluptates quisquam fuga, quaerat neque error minima sequi amet doloremque laudantium ipsum voluptas. Animi eius culpa harum atque placeat esse aut assumenda adipisci ipsa, veniam labore nesciunt totam enim nobis ullam recusandae libero dolores incidunt dolorum iusto eligendi repellat. Vero incidunt soluta porro rerum explicabo. Aut voluptatem reprehenderit facilis in odit accusamus alias delectus laudantium, ex obcaecati fugit quod debitis blanditiis voluptates suscipit illum, molestias error ipsa? Quidem praesentium maiores necessitatibus officiis nemo enim quia magni quibusdam cupiditate numquam. Distinctio sint perferendis omnis velit pariatur.
+            </div>
+        </p>
+    </main>
+
+    <!---
     <div class="boids" id="boids">
         <a href="boids/normal/index.html">
             <div class="boids-outer">
@@ -58,5 +104,6 @@
             </div>
         </a>
     </div>
+    -->
 </body>
 </html>

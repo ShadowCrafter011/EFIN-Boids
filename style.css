@@ -1,8 +1,101 @@
 :root {
     background-color: #363636;
     color: white;
+    
+    font-family: "Roboto Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
+    --link-color: rgb(150, 150, 150);
+    --header-color: #00b6b6;
+    --iframe-scale-factor: 0.4;
 }
 
+body {
+    padding: 5rem;
+    padding-top: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--header-color);
+}
+
+h2 {
+    color: var(--header-color);
+}
+
+a {
+    color: var(--link-color);
+    transition: color .25s ease-in-out;
+}
+
+a:hover {
+    color: white;
+}
+
+a:visited {
+    color: var(--link-color);
+}
+
+a:visited:hover {
+    color: white;
+}
+
+phone-disclaimer {
+    text-align: center;
+}
+
+iframe {
+    height: 100vh;
+    width: 100vw;
+    transform: scale(var(--iframe-scale-factor));
+    position: absolute;
+    cursor: pointer;
+}
+
+.iframe-container {
+    position: relative;
+}
+
+.iframe-spacing {
+    height: calc(100vh * var(--iframe-scale-factor));
+    width: calc(100vw * var(--iframe-scale-factor));
+
+}
+
+.right {
+    right: 0;
+    transform-origin: right top;
+}
+
+.spacing-right {
+    float: right;
+}
+
+@media screen and (max-width: 999px) {
+    phone-disclaimer {
+        display: block;
+    }
+
+    main {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    phone-disclaimer {
+        display: none;
+    }
+
+    main {
+        display: block;
+    }
+}
+
+/*
 body {
     margin: 0;
     padding: 0;
@@ -42,4 +135,4 @@ iframe {
 a {
     color: white;
     text-decoration: none;
-}
+} */
