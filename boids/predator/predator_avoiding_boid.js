@@ -3,9 +3,12 @@ class PredatorAvoidingBoid extends Boid {
         super(...args);
         this.recalculate_params(1);
         this.predator_avoiding_factor = 0.003;
+        this.dead = false;
     }
 
     update(boids) {
+        if (this.dead) return;
+
         let nearest_predator, predator_dist;
 
         this.loop_boids(boids, this.visual_range, (boid) => {
@@ -23,5 +26,14 @@ class PredatorAvoidingBoid extends Boid {
         }
 
         super.update(boids);
+    }
+
+    loop_boids(boids, max_dist, fn) {
+        for (let boid of boids) {
+            if (boid === this) continue;
+            if (boid.dead) continue;
+            if (this.pos.dist(boid.pos) > max_dist) continue;
+            fn(boid);
+        }
     }
 }

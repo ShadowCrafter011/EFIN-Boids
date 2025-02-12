@@ -238,6 +238,47 @@
                     <a href="/boids/new_boid/">here</a>.
                 </span>
             </div>
+            <div
+                class="margin-top iframe-container"
+                style="min-height: calc(100vh * var(--iframe-scale-factor))"
+            >
+                <h2>Predator - prey simulation</h2>
+                <iframe
+                    src="boids/predator/"
+                    frameborder="0"
+                    class="right"
+                ></iframe>
+                <a
+                    href="boids/predator/"
+                    class="iframe-spacing spacing-right"
+                ></a>
+                As my last simulation I've descided to add a predatory boid to
+                chase the other prey boids. My goal was that the predator chases
+                the boids until they are forced to split up their flock whilst
+                trying to avoid the predator.
+                <p>
+                    The predators are stripped of all their flocking behaviour
+                    and follow only one goal: To steer towards the center of
+                    mass of the prey boids they can see. Predators have a hunger
+                    parameter which increases by 0.1% each timestep. If that
+                    hunger parameter reaches a value of 200% they die. They can
+                    lower their hunger meter by killing and eating other boids.
+                    To do that they must come close enough to a boid for it to
+                    be in their killing range. A predators speed and ability to
+                    quickly change direction increases as they get hungrier.
+                </p>
+                <p>
+                    The prey try to steer away from the nearest predator they
+                    see whilst keeping their flocking behaviour.
+                </p>
+                <p>
+                    After tweaking some parameters I had a decent looking
+                    simulation where the predator is sometimes able to cleanly
+                    split the flock of boids. In this simulation I only have one
+                    predator and if he happens to die the simulation gets reset
+                    after five seconds.
+                </p>
+            </div>
         </main>
     </body>
 </html>
