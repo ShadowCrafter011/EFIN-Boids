@@ -10,7 +10,7 @@ function setup() {
 
     grid.add_boids(
         spawner.spawn(
-            50,
+            100,
             PredatorAvoidingBoid.random_vel.bind(PredatorAvoidingBoid)
         )
     );
@@ -21,5 +21,4 @@ function setup() {
 function draw() {
     background(0);
     grid.update();
-    spawner.show();
 }
