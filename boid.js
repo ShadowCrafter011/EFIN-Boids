@@ -2,11 +2,17 @@ class Boid {
     constructor(index, x, y, vx, vy) {
         this.index = index;
 
+        this.color = "white";
+
         this.pos = createVector(x, y);
         this.vel = createVector(vx, vy);
 
         let param_factor = 2;
 
+        this.recalculate_params(param_factor);
+    }
+
+    recalculate_params(param_factor) {
         this.max_speed = 3 * param_factor;
         this.min_speed = this.max_speed - 1;
 
@@ -26,7 +32,11 @@ class Boid {
             Math.random() * height,
             Math.random() - 0.5,
             Math.random() - 0.5
-        )
+        );
+    }
+
+    static random_vel(x, y) {
+        return new this(0, x, y, Math.random() - 0.5, Math.random() - 0.5);
     }
 
     update(boids) {
@@ -34,11 +44,7 @@ class Boid {
         let matching = this.match(boids);
         let cohesion = this.cohese(boids);
         let avoiding = this.avoid_walls();
-        this.vel
-            .add(separation)
-            .add(matching)
-            .add(cohesion)
-            .add(avoiding);
+        this.vel.add(separation).add(matching).add(cohesion).add(avoiding);
         this.clamp_speed();
         this.pos.add(this.vel);
 
@@ -52,17 +58,17 @@ class Boid {
         // this.show_ranges()
 
         noStroke();
-        fill("white");
+        fill(this.color);
         let normal = this.vel.copy().normalize().mult(3);
-        let rotated = this.vel.copy().normalize().rotate(PI / 2).mult(2.5);
+        let rotated = this.vel
+            .copy()
+            .normalize()
+            .rotate(PI / 2)
+            .mult(2.5);
         let front = this.pos.copy().add(normal);
         let left = this.pos.copy().add(rotated).sub(normal);
         let right = this.pos.copy().sub(rotated).sub(normal);
-        triangle(
-            front.x, front.y,
-            left.x, left.y,
-            right.x, right.y
-        )
+        triangle(front.x, front.y, left.x, left.y, right.x, right.y);
     }
 
     clamp_speed() {
@@ -72,7 +78,7 @@ class Boid {
 
     separate(boids) {
         let close = createVector(0, 0);
-        this.loop_boids(boids, this.protected_range, boid => {
+        this.loop_boids(boids, this.protected_range, (boid) => {
             close.add(this.pos.copy().sub(boid.pos));
         });
         return close.mult(this.separation_factor);
@@ -81,7 +87,7 @@ class Boid {
     match(boids) {
         let neigh_boids = 0;
         let average = createVector(0, 0);
-        this.loop_boids(boids, this.visual_range, boid => {
+        this.loop_boids(boids, this.visual_range, (boid) => {
             neigh_boids++;
             average.add(boid.vel);
         });
@@ -93,7 +99,7 @@ class Boid {
     cohese(boids) {
         let neigh_boids = 0;
         let average = createVector(0, 0);
-        this.loop_boids(boids, this.visual_range, boid => {
+        this.loop_boids(boids, this.visual_range, (boid) => {
             neigh_boids++;
             average.add(boid.pos);
         });
@@ -126,10 +132,14 @@ class Boid {
     }
 
     avoid_walls() {
-        if (this.pos.x < this.wall_margin) this.vel.add(createVector(this.turnfactor, 0));
-        if (this.pos.x > width - this.wall_margin) this.vel.add(createVector(-this.turnfactor, 0));
-        if (this.pos.y < this.wall_margin) this.vel.add(createVector(0, this.turnfactor));
-        if (this.pos.y > height - this.wall_margin) this.vel.add(createVector(0, -this.turnfactor));
+        if (this.pos.x < this.wall_margin)
+            this.vel.add(createVector(this.turnfactor, 0));
+        if (this.pos.x > width - this.wall_margin)
+            this.vel.add(createVector(-this.turnfactor, 0));
+        if (this.pos.y < this.wall_margin)
+            this.vel.add(createVector(0, this.turnfactor));
+        if (this.pos.y > height - this.wall_margin)
+            this.vel.add(createVector(0, -this.turnfactor));
 
         // if (this.pos.x < this.wall_margin) this.wall_rotation(-1, 0);
         // if (this.pos.x > width - this.wall_margin) this.wall_rotation(1, 0);
@@ -154,6 +164,6 @@ class Boid {
             this.pos.x < width &&
             this.pos.y > 0 &&
             this.pos.y < height
-        )
+        );
     }
 }
