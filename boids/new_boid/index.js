@@ -6,14 +6,14 @@ function setup() {
         window.innerHeight
     );
 
-    grid = new Grid(width, innerHeight, 100);
+    grid = new Grid(width, innerHeight, 200);
 
     spawner = new Spawner(
         createVector(200, 200), 50, 1,
         createVector(width - 200, height - 200), 50, 1
     )
 
-    let boids = spawner.spawn(100, NewBoid.random_vel.bind(NewBoid));
+    let boids = spawner.spawn(25, NewBoid.random_vel.bind(NewBoid));
     grid.add_boids(boids);
 
     let margin = 50;

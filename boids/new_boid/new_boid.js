@@ -3,11 +3,14 @@ class NewBoid {
         this.pos = createVector(x, y);
         this.vel = createVector(vx, vy);
 
-        this.max_vel = 3;
-        this.min_vel = 2;
+        this.max_vel = 5;
+        this.min_vel = 4;
 
-        this.separation_factor = 0.5;
+        this.separation_factor = 1;
+        this.matching_factor = 0.08;
+        this.cohesion_factor = 0.005;
         this.protected_range = 100;
+        this.visual_range = 200;
         this.blind_spot_angle = 90;
         this.num_rays = 50;
         this.rays = [];
@@ -39,7 +42,11 @@ class NewBoid {
     update(boids, obstacles) {
         let separation = this.separate_obstacles(obstacles);
         let boid_separation = this.separate_boids(boids);
+        let cohesion = this.cohese(boids);
+        let matching = this.match(boids);
+        this.vel.add(matching);
         this.vel.add(boid_separation);
+        this.vel.add(cohesion);
         this.rotate_towards(separation);
         this.clamp_velocity();
 
@@ -56,6 +63,30 @@ class NewBoid {
 
         this.show();
         // this.show_rays();
+    }
+
+    cohese(boids) {
+        let neigh_boids = 0;
+        let average = createVector(0, 0);
+        this.loop_boids(boids, this.visual_range, boid => {
+            neigh_boids++;
+            average.add(boid.pos);
+        });
+        if (neigh_boids == 0) return;
+        let avg = average.div(neigh_boids);
+        return avg.sub(this.pos).mult(this.cohesion_factor);
+    }
+
+    match(boids) {
+        let neigh_boids = 0;
+        let average = createVector(0, 0);
+        this.loop_boids(boids, this.visual_range, boid => {
+            neigh_boids++;
+            average.add(boid.vel);
+        });
+        if (neigh_boids == 0) return;
+        let avg = average.div(neigh_boids);
+        return avg.sub(this.vel).mult(this.matching_factor);
     }
 
     separate_boids(boids) {
@@ -97,11 +128,7 @@ class NewBoid {
         
         let normalized_dist = min_dist / this.protected_range;
 
-        if (direction) {
-            return direction.setMag(NewBoid.ease_in_circ(1 - normalized_dist));
-        } else {
-            console.log(direction, min_dist_ray, max_dist_ray)
-        }
+        return direction.setMag(NewBoid.ease_in_circ(1 - normalized_dist));
     }
 
     loop_boids(boids, max_dist, fn) {

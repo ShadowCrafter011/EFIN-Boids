@@ -2,9 +2,17 @@ class LineObstacle extends Obstacle {
     constructor(x1, y1, x2, y2, normal, invisible = false) {
         super();
         this.invisible = invisible;
-        this.normal = normal;
+        this.saved_normal = normal;
         this.p1 = createVector(x1, y1);
         this.p2 = createVector(x2, y2);
+    }
+
+    get normal() {
+        if (this.saved_normal) return this.saved_normal;
+    }
+
+    set normal(normal) {
+        this.normal = normal;
     }
 
     show() {
