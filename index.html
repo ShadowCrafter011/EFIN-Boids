@@ -260,12 +260,13 @@
                     The predators are stripped of all their flocking behaviour
                     and follow only one goal: To steer towards the center of
                     mass of the prey boids they can see. Predators have a hunger
-                    parameter which increases by 0.1% each timestep. If that
-                    hunger parameter reaches a value of 200% they die. They can
-                    lower their hunger meter by killing and eating other boids.
-                    To do that they must come close enough to a boid for it to
-                    be in their killing range. A predators speed and ability to
-                    quickly change direction increases as they get hungrier.
+                    parameter which increases by 0.05% each timestep. If that
+                    hunger parameter reaches a value of 100% they die. They can
+                    lower their hunger meter by 25% by killing and eating
+                    another boid. To do that they must come close enough to a
+                    boid for it to be within their killing range. A predators
+                    speed and ability to quickly change direction increases as
+                    they get hungrier.
                 </p>
                 <p>
                     The prey try to steer away from the nearest predator they
@@ -277,6 +278,17 @@
                     split the flock of boids. In this simulation I only have one
                     predator and if he happens to die the simulation gets reset
                     after five seconds.
+                </p>
+                <p>
+                    As the predator always steers towards the gravitational
+                    center of nearby boids it usually is very undesisive and
+                    killing a boid rather depends on luck. To mitigate this I
+                    added a targetting range. If a boid gets close enough to a
+                    predator the predator will start targetting that boid on
+                    soley steering towards its position. Targettet boids are
+                    drawn in green. Additionally predators only target boids if
+                    their hunger meter is above 25%. You can find this
+                    simulation <a href="boids/locking_predator/">here</a>.
                 </p>
             </div>
         </main>
